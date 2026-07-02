@@ -1,0 +1,45 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 60px;
+  background-color: #c0392b;
+  color: #fff;
+}
+
+.header__title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.header__timer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header__todo-name {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.header__time {
+  font-size: 22px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.header__btn {
+  padding: 4px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 4px;
+  background: transparent;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.header__btn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
