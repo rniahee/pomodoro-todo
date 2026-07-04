@@ -1,3 +1,5 @@
+import './styles/reset.css';
+import './styles/global.css';
 import { mountHeader } from './components/header/header.js';
 import { mountListPanel } from './components/listPanel/listPanel.js';
 import { mountTodoPanel } from './components/todoPanel/todoPanel.js';
