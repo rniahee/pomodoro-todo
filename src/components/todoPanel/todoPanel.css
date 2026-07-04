@@ -1,0 +1,172 @@
+.todo-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.todo-panel--empty {
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.todo-panel__title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 16px;
+}
+
+.todo-panel__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.todo-input {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.todo-input__field {
+  flex: 1;
+  padding: 7px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+}
+
+.todo-input__field:focus {
+  border-color: #c0392b;
+}
+
+.todo-input__minutes {
+  width: 56px;
+  padding: 7px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+  outline: none;
+}
+
+.todo-input__minutes:focus {
+  border-color: #c0392b;
+}
+
+.todo-input__unit {
+  font-size: 13px;
+  color: #666;
+}
+
+.todo-input__btn {
+  padding: 7px 12px;
+  background-color: #c0392b;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.todo-input__btn:hover {
+  background-color: #a93226;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+.todo-item--done {
+  opacity: 0.5;
+}
+
+.todo-item--active {
+  border-color: #c0392b;
+  background-color: #fdecea;
+}
+
+.todo-item__check {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.todo-item__text {
+  flex: 1;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.todo-item--done .todo-item__text {
+  text-decoration: line-through;
+}
+
+.todo-item__count {
+  font-size: 13px;
+  color: #666;
+  flex-shrink: 0;
+}
+
+.todo-item__time {
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  color: #555;
+  flex-shrink: 0;
+}
+
+.todo-item__start {
+  padding: 4px 10px;
+  background-color: #c0392b;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.todo-item__start:hover:not(:disabled) {
+  background-color: #a93226;
+}
+
+.todo-item__start:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.todo-item__delete {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 4px;
+  flex-shrink: 0;
+}
+
+.todo-item__delete:hover:not(:disabled) {
+  color: #c0392b;
+}
+
+.todo-item__delete:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
