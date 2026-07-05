@@ -2,6 +2,15 @@ import { appStore } from './appStore.js';
 
 const generateId = () => Date.now().toString();
 
+function updateTodosInList(prev, listId, updater) {
+  return {
+    ...prev,
+    lists: prev.lists.map((l) =>
+      l.id !== listId ? l : { ...l, todos: updater(l.todos) },
+    ),
+  };
+}
+
 export const actions = {
   // 목록
   addList(name) {
@@ -26,69 +35,44 @@ export const actions = {
 
   // 할 일
   addTodo(listId, text, pomodoroMinutes) {
-    appStore.setState((prev) => ({
-      ...prev,
-      lists: prev.lists.map((l) =>
-        l.id !== listId
-          ? l
-          : {
-              ...l,
-              todos: [
-                ...l.todos,
-                {
-                  id: generateId(),
-                  text,
-                  pomodoroMinutes,
-                  pomodoroCount: 0,
-                  isDone: false,
-                },
-              ],
-            },
-      ),
-    }));
+    appStore.setState((prev) =>
+      updateTodosInList(prev, listId, (todos) => [
+        ...todos,
+        {
+          id: generateId(),
+          text,
+          pomodoroMinutes,
+          pomodoroCount: 0,
+          isDone: false,
+        },
+      ]),
+    );
   },
 
   updateTodo(listId, todoId, text, pomodoroMinutes) {
-    appStore.setState((prev) => ({
-      ...prev,
-      lists: prev.lists.map((l) =>
-        l.id !== listId
-          ? l
-          : {
-              ...l,
-              todos: l.todos.map((t) =>
-                t.id !== todoId ? t : { ...t, text, pomodoroMinutes },
-              ),
-            },
+    appStore.setState((prev) =>
+      updateTodosInList(prev, listId, (todos) =>
+        todos.map((t) =>
+          t.id !== todoId ? t : { ...t, text, pomodoroMinutes },
+        ),
       ),
-    }));
+    );
   },
 
   deleteTodo(listId, todoId) {
-    appStore.setState((prev) => ({
-      ...prev,
-      lists: prev.lists.map((l) =>
-        l.id !== listId
-          ? l
-          : { ...l, todos: l.todos.filter((t) => t.id !== todoId) },
+    appStore.setState((prev) =>
+      updateTodosInList(prev, listId, (todos) =>
+        todos.filter((t) => t.id !== todoId),
       ),
-    }));
+    );
   },
 
   toggleTodo(listId, todoId) {
-    appStore.setState((prev) => ({
-      ...prev,
-      lists: prev.lists.map((l) =>
-        l.id !== listId
-          ? l
-          : {
-              ...l,
-              todos: l.todos.map((t) =>
-                t.id !== todoId ? t : { ...t, isDone: !t.isDone },
-              ),
-            },
+    appStore.setState((prev) =>
+      updateTodosInList(prev, listId, (todos) =>
+        todos.map((t) => (t.id !== todoId ? t : { ...t, isDone: !t.isDone })),
       ),
-    }));
+    );
   },
 
   // 타이머
@@ -142,20 +126,12 @@ export const actions = {
   },
 
   incrementPomodoroCount(listId, todoId) {
-    appStore.setState((prev) => ({
-      ...prev,
-      lists: prev.lists.map((l) =>
-        l.id !== listId
-          ? l
-          : {
-              ...l,
-              todos: l.todos.map((t) =>
-                t.id !== todoId
-                  ? t
-                  : { ...t, pomodoroCount: t.pomodoroCount + 1 },
-              ),
-            },
+    appStore.setState((prev) =>
+      updateTodosInList(prev, listId, (todos) =>
+        todos.map((t) =>
+          t.id !== todoId ? t : { ...t, pomodoroCount: t.pomodoroCount + 1 },
+        ),
       ),
-    }));
+    );
   },
 };
