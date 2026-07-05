@@ -1,12 +1,7 @@
 import { appStore } from '../../store/appStore.js';
 import { pomodoroTimer } from '../../timer/pomodoroTimer.js';
+import { formatTime } from '../../utils/formatTime.js';
 import './header.css';
-
-const formatTime = (seconds) => {
-  const m = String(Math.floor(seconds / 60)).padStart(2, '0');
-  const s = String(seconds % 60).padStart(2, '0');
-  return `${m}:${s}`;
-};
 
 export const mountHeader = (container) => {
   const render = () => {

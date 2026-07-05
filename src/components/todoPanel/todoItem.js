@@ -1,12 +1,7 @@
 import { appStore } from '../../store/appStore.js';
 import { actions } from '../../store/actions.js';
 import { pomodoroTimer } from '../../timer/pomodoroTimer.js';
-
-const formatTime = (seconds) => {
-  const m = String(Math.floor(seconds / 60)).padStart(2, '0');
-  const s = String(seconds % 60).padStart(2, '0');
-  return `${m}:${s}`;
-};
+import { formatTime } from '../../utils/formatTime.js';
 
 export const mountTodoItem = (container, listId, todo) => {
   const { timer } = appStore.getState();
