@@ -5,7 +5,7 @@ class PomodoroTimer {
   #intervalId = null;
 
   start(listId, todoId, seconds) {
-    this.stop();
+    this.#clear();
     actions.setTimer({
       activeTodoId: todoId,
       activeListId: listId,
@@ -15,12 +15,11 @@ class PomodoroTimer {
     this.#intervalId = setInterval(() => {
       const { timer } = appStore.getState();
 
-      if (timer.isPaused) return;
-
       if (timer.remainingSeconds <= 1) {
         actions.tickTimer();
         actions.incrementPomodoroCount(listId, todoId);
-        this.stop();
+        this.#clear();
+        actions.resetTimer();
         return;
       }
 
@@ -29,23 +28,29 @@ class PomodoroTimer {
   }
 
   pause() {
+    this.#clear();
     actions.pauseTimer();
   }
 
   resume() {
-    actions.resumeTimer();
+    const { timer } = appStore.getState();
+    this.start(timer.activeListId, timer.activeTodoId, timer.remainingSeconds);
   }
 
   stop() {
-    if (this.#intervalId !== null) {
-      clearInterval(this.#intervalId);
-      this.#intervalId = null;
-    }
+    this.#clear();
     actions.resetTimer();
   }
 
   isRunning() {
     return this.#intervalId !== null;
+  }
+
+  #clear() {
+    if (this.#intervalId !== null) {
+      clearInterval(this.#intervalId);
+      this.#intervalId = null;
+    }
   }
 }
 

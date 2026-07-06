@@ -106,13 +106,6 @@ export const actions = {
     }));
   },
 
-  resumeTimer() {
-    appStore.setState((prev) => ({
-      ...prev,
-      timer: { ...prev.timer, isPaused: false },
-    }));
-  },
-
   resetTimer() {
     appStore.setState((prev) => ({
       ...prev,
