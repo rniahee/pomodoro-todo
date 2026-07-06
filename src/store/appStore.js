@@ -1,6 +1,8 @@
 import { Store } from './store.js';
 
-const initialState = {
+const STORAGE_KEY = 'pomodoro-todo';
+
+const defaultState = {
   lists: [],
   selectedListId: null,
   timer: {
@@ -11,4 +13,20 @@ const initialState = {
   },
 };
 
-export const appStore = new Store(initialState);
+const loadState = () => {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return defaultState;
+    const parsed = JSON.parse(saved);
+    return { ...defaultState, ...parsed, timer: defaultState.timer };
+  } catch {
+    return defaultState;
+  }
+};
+
+export const appStore = new Store(loadState());
+
+appStore.subscribe(() => {
+  const { lists, selectedListId } = appStore.getState();
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({ lists, selectedListId }));
+});
