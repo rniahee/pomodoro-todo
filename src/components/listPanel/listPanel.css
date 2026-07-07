@@ -89,3 +89,10 @@
 .list-item__delete:hover {
   color: #c0392b;
 }
+
+.list-input__error {
+  padding: 0 12px 8px;
+  font-size: 12px;
+  color: #c0392b;
+  min-height: 18px;
+}
