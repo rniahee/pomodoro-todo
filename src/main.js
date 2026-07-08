@@ -1,8 +1,11 @@
 import './styles/reset.css';
 import './styles/global.css';
+import { requestNotificationPermission } from './utils/notification.js';
 import { mountHeader } from './components/header/header.js';
 import { mountListPanel } from './components/listPanel/listPanel.js';
 import { mountTodoPanel } from './components/todoPanel/todoPanel.js';
+
+requestNotificationPermission();
 
 const app = document.querySelector('#app');
 

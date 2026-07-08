@@ -1,5 +1,6 @@
 import { appStore } from '../store/appStore.js';
 import { actions } from '../store/actions.js';
+import { sendNotification } from '../utils/notification.js';
 
 class PomodoroTimer {
   #intervalId = null;
@@ -13,13 +14,19 @@ class PomodoroTimer {
     });
 
     this.#intervalId = setInterval(() => {
-      const { timer } = appStore.getState();
+      const { timer, lists } = appStore.getState();
 
       if (timer.remainingSeconds <= 1) {
+        const list = lists.find((l) => l.id === listId);
+        const todo = list?.todos.find((t) => t.id === todoId);
         actions.tickTimer();
         actions.incrementPomodoroCount(listId, todoId);
         this.#clear();
         actions.resetTimer();
+        sendNotification(
+          '뽀모도로 완료! 🍅',
+          `"${todo?.text}" 세션이 끝났습니다.`,
+        );
         return;
       }
 
