@@ -1,6 +1,34 @@
+:root {
+  --color-primary: #c0392b;
+  --color-primary-dark: #a93226;
+  --color-bg: #ffffff;
+  --color-bg-sub: #fafafa;
+  --color-bg-active: #fdecea;
+  --color-border: #e0e0e0;
+  --color-text: #111111;
+  --color-text-sub: #666666;
+  --color-text-muted: #aaaaaa;
+  --color-header-text: #ffffff;
+}
+
+:root[data-theme='dark'] {
+  --color-bg: #1a1a1a;
+  --color-bg-sub: #242424;
+  --color-bg-active: #3b1f1f;
+  --color-border: #333333;
+  --color-text: #f0f0f0;
+  --color-text-sub: #aaaaaa;
+  --color-text-muted: #666666;
+}
+
 html,
 body {
   height: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 
 #app {

@@ -3,6 +3,17 @@ import { pomodoroTimer } from '../../timer/pomodoroTimer.js';
 import { formatTime } from '../../utils/formatTime.js';
 import './header.css';
 
+const THEME_KEY = 'pomodoro-theme';
+
+const getTheme = () => localStorage.getItem(THEME_KEY) ?? 'light';
+
+const applyTheme = (theme) => {
+  document.documentElement.dataset.theme = theme;
+  localStorage.setItem(THEME_KEY, theme);
+};
+
+applyTheme(getTheme());
+
 export const mountHeader = (container) => {
   const render = () => {
     const { lists, timer } = appStore.getState();
@@ -11,6 +22,7 @@ export const mountHeader = (container) => {
     const activeList = lists.find((l) => l.id === activeListId);
     const activeTodo = activeList?.todos.find((t) => t.id === activeTodoId);
     const isRunning = pomodoroTimer.isRunning();
+    const isDark = getTheme() === 'dark';
 
     container.innerHTML = `
       <div class="header">
@@ -29,6 +41,7 @@ export const mountHeader = (container) => {
               : ''
           }
         </div>
+        <button class="header__theme-btn js-theme">${isDark ? '☀️' : '🌙'}</button>
       </div>
     `;
 
@@ -44,6 +57,11 @@ export const mountHeader = (container) => {
 
     container.querySelector('.js-stop')?.addEventListener('click', () => {
       pomodoroTimer.stop();
+    });
+
+    container.querySelector('.js-theme').addEventListener('click', () => {
+      applyTheme(getTheme() === 'dark' ? 'light' : 'dark');
+      render();
     });
   };
 

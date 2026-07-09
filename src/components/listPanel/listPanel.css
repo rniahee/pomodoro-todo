@@ -3,8 +3,8 @@
   flex-direction: column;
   width: 260px;
   height: 100%;
-  border-right: 1px solid #e0e0e0;
-  background-color: #fafafa;
+  border-right: 1px solid var(--color-border);
+  background-color: var(--color-bg-sub);
 }
 
 .list-panel__list {
@@ -18,25 +18,27 @@
   display: flex;
   gap: 6px;
   padding: 12px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .list-input__field {
   flex: 1;
   padding: 6px 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   font-size: 14px;
   outline: none;
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 
 .list-input__field:focus {
-  border-color: #c0392b;
+  border-color: var(--color-primary);
 }
 
 .list-input__btn {
   padding: 6px 10px;
-  background-color: #c0392b;
+  background-color: var(--color-primary);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -45,7 +47,14 @@
 }
 
 .list-input__btn:hover {
-  background-color: #a93226;
+  background-color: var(--color-primary-dark);
+}
+
+.list-input__error {
+  padding: 0 12px 8px;
+  font-size: 12px;
+  color: var(--color-primary);
+  min-height: 18px;
 }
 
 .list-item {
@@ -57,11 +66,11 @@
 }
 
 .list-item:hover {
-  background-color: #f0f0f0;
+  background-color: var(--color-border);
 }
 
 .list-item--selected {
-  background-color: #fdecea;
+  background-color: var(--color-bg-active);
 }
 
 .list-item__name {
@@ -75,7 +84,7 @@
   flex-shrink: 0;
   background: none;
   border: none;
-  color: #aaa;
+  color: var(--color-text-muted);
   font-size: 12px;
   cursor: pointer;
   padding: 2px 4px;
@@ -87,12 +96,5 @@
 }
 
 .list-item__delete:hover {
-  color: #c0392b;
-}
-
-.list-input__error {
-  padding: 0 12px 8px;
-  font-size: 12px;
-  color: #c0392b;
-  min-height: 18px;
+  color: var(--color-primary);
 }

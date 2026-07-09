@@ -9,7 +9,7 @@
 .todo-panel--empty {
   align-items: center;
   justify-content: center;
-  color: #aaa;
+  color: var(--color-text-muted);
   font-size: 14px;
 }
 
@@ -38,38 +38,42 @@
 .todo-input__field {
   flex: 1;
   padding: 7px 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   font-size: 14px;
   outline: none;
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 
 .todo-input__field:focus {
-  border-color: #c0392b;
+  border-color: var(--color-primary);
 }
 
 .todo-input__minutes {
   width: 56px;
   padding: 7px 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   font-size: 14px;
   text-align: center;
   outline: none;
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 
 .todo-input__minutes:focus {
-  border-color: #c0392b;
+  border-color: var(--color-primary);
 }
 
 .todo-input__unit {
   font-size: 13px;
-  color: #666;
+  color: var(--color-text-sub);
 }
 
 .todo-input__btn {
   padding: 7px 12px;
-  background-color: #c0392b;
+  background-color: var(--color-primary);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -78,7 +82,14 @@
 }
 
 .todo-input__btn:hover {
-  background-color: #a93226;
+  background-color: var(--color-primary-dark);
+}
+
+.todo-input__error {
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: var(--color-primary);
+  min-height: 18px;
 }
 
 .todo-item {
@@ -86,9 +97,9 @@
   align-items: center;
   gap: 10px;
   padding: 10px 14px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-border);
   border-radius: 6px;
-  background-color: #fff;
+  background-color: var(--color-bg);
 }
 
 .todo-item--done {
@@ -96,8 +107,8 @@
 }
 
 .todo-item--active {
-  border-color: #c0392b;
-  background-color: #fdecea;
+  border-color: var(--color-primary);
+  background-color: var(--color-bg-active);
 }
 
 .todo-item__check {
@@ -121,20 +132,20 @@
 
 .todo-item__count {
   font-size: 13px;
-  color: #666;
+  color: var(--color-text-sub);
   flex-shrink: 0;
 }
 
 .todo-item__time {
   font-size: 14px;
   font-variant-numeric: tabular-nums;
-  color: #555;
+  color: var(--color-text-sub);
   flex-shrink: 0;
 }
 
 .todo-item__start {
   padding: 4px 10px;
-  background-color: #c0392b;
+  background-color: var(--color-primary);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -144,18 +155,18 @@
 }
 
 .todo-item__start:hover:not(:disabled) {
-  background-color: #a93226;
+  background-color: var(--color-primary-dark);
 }
 
 .todo-item__start:disabled {
-  background-color: #ccc;
+  background-color: var(--color-text-muted);
   cursor: not-allowed;
 }
 
 .todo-item__delete {
   background: none;
   border: none;
-  color: #aaa;
+  color: var(--color-text-muted);
   font-size: 12px;
   cursor: pointer;
   padding: 2px 4px;
@@ -163,17 +174,10 @@
 }
 
 .todo-item__delete:hover:not(:disabled) {
-  color: #c0392b;
+  color: var(--color-primary);
 }
 
 .todo-item__delete:disabled {
   cursor: not-allowed;
   opacity: 0.3;
-}
-
-.todo-input__error {
-  margin-bottom: 8px;
-  font-size: 12px;
-  color: #c0392b;
-  min-height: 18px;
 }
