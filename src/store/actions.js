@@ -127,4 +127,15 @@ export const actions = {
       ),
     );
   },
+
+  reorderTodos(listId, fromIndex, toIndex) {
+    appStore.setState((prev) =>
+      updateTodosInList(prev, listId, (todos) => {
+        const result = [...todos];
+        const [moved] = result.splice(fromIndex, 1);
+        result.splice(toIndex, 0, moved);
+        return result;
+      }),
+    );
+  },
 };
