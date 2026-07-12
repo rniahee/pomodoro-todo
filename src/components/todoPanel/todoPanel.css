@@ -190,3 +190,36 @@
   border-color: var(--color-primary);
   border-style: dashed;
 }
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background-color: var(--color-bg-sub);
+  font-size: 13px;
+}
+
+.stats__row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.stats__label {
+  color: var(--color-text-muted);
+  width: 64px;
+  flex-shrink: 0;
+}
+
+.stats__item {
+  color: var(--color-text-sub);
+}
+
+.stats__item b {
+  color: var(--color-text);
+  font-weight: 600;
+}

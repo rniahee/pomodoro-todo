@@ -4,6 +4,33 @@ import { mountTodoInput } from './todoInput.js';
 import { mountTodoItem } from './todoItem.js';
 import './todoPanel.css';
 
+const calcStats = (todos) => {
+  const total = todos.length;
+  const done = todos.filter((t) => t.isDone).length;
+  const rate = total === 0 ? 0 : Math.round((done / total) * 100);
+  const pomodoros = todos.reduce((sum, t) => sum + t.pomodoroCount, 0);
+  return { total, done, rate, pomodoros };
+};
+
+const renderStats = (current, all) => `
+  <div class="stats">
+    <div class="stats__row">
+      <span class="stats__label">현재 목록</span>
+      <span class="stats__item">전체 <b>${current.total}</b></span>
+      <span class="stats__item">완료 <b>${current.done}</b></span>
+      <span class="stats__item">완료율 <b>${current.rate}%</b></span>
+      <span class="stats__item">🍅 <b>${current.pomodoros}</b></span>
+    </div>
+    <div class="stats__row">
+      <span class="stats__label">전체 목록</span>
+      <span class="stats__item">전체 <b>${all.total}</b></span>
+      <span class="stats__item">완료 <b>${all.done}</b></span>
+      <span class="stats__item">완료율 <b>${all.rate}%</b></span>
+      <span class="stats__item">🍅 <b>${all.pomodoros}</b></span>
+    </div>
+  </div>
+`;
+
 const setupDragAndDrop = (listEl, listId) => {
   let draggedIndex = null;
 
@@ -58,9 +85,14 @@ export const mountTodoPanel = (container) => {
       return;
     }
 
+    const allTodos = lists.flatMap((l) => l.todos);
+    const currentStats = calcStats(selectedList.todos);
+    const allStats = calcStats(allTodos);
+
     container.innerHTML = `
       <div class="todo-panel">
         <h2 class="todo-panel__title">${selectedList.name}</h2>
+        ${renderStats(currentStats, allStats)}
         <div class="todo-panel__input-area"></div>
         <ul class="todo-panel__list">
           ${selectedList.todos.map((todo) => `<li data-id="${todo.id}"></li>`).join('')}
