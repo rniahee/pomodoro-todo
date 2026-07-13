@@ -2,6 +2,8 @@
 
 할 일마다 뽀모도로 타이머를 설정하고, 집중 세션을 관리할 수 있는 투두 앱입니다.
 
+**Demo:** [https://pomodoro-todo-vercel.vercel.app](https://pomodoro-todo-vercel.vercel.app)
+
 ## 프로젝트 배경
 
 뽀모도로 기법을 실천하려 할 때, 타이머 앱과 할 일 앱을 번갈아 써야 하는 번거로움을 자주 느꼈습니다.
