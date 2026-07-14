@@ -1,5 +1,7 @@
 import { appStore } from '../../store/appStore.js';
 import { actions } from '../../store/actions.js';
+import { pomodoroTimer } from '../../timer/pomodoroTimer.js';
+import { formatTime } from '../../utils/formatTime.js';
 import { mountTodoInput } from './todoInput.js';
 import { mountTodoItem } from './todoItem.js';
 import './todoPanel.css';
@@ -71,10 +73,57 @@ const setupDragAndDrop = (listEl, listId) => {
   });
 };
 
+const updateTimerDisplay = (container, todos, timer) => {
+  const isRunning = pomodoroTimer.isRunning();
+
+  todos.forEach((todo) => {
+    const li = container.querySelector(`li[data-id="${todo.id}"]`);
+    if (!li) return;
+
+    const isActive = timer.activeTodoId === todo.id;
+    const isPaused = isActive && timer.isPaused;
+
+    const timeEl = li.querySelector('.todo-item__time');
+    if (timeEl) {
+      timeEl.textContent = isActive
+        ? formatTime(timer.remainingSeconds)
+        : formatTime(todo.pomodoroMinutes * 60);
+    }
+
+    const itemEl = li.querySelector('.todo-item');
+    if (itemEl) {
+      itemEl.classList.toggle('todo-item--active', isActive);
+    }
+
+    const startBtn = li.querySelector('.todo-item__start');
+    if (startBtn) {
+      startBtn.textContent = isActive
+        ? isPaused
+          ? '재개'
+          : '일시정지'
+        : '시작';
+      startBtn.disabled = todo.isDone || (isRunning && !isActive);
+    }
+  });
+};
+
 export const mountTodoPanel = (container) => {
+  let prevLists = null;
+  let prevSelectedListId = null;
+
   const render = () => {
-    const { lists, selectedListId } = appStore.getState();
+    const { lists, selectedListId, timer } = appStore.getState();
     const selectedList = lists.find((l) => l.id === selectedListId);
+
+    if (lists === prevLists && selectedListId === prevSelectedListId) {
+      if (selectedList) {
+        updateTimerDisplay(container, selectedList.todos, timer);
+      }
+      return;
+    }
+
+    prevLists = lists;
+    prevSelectedListId = selectedListId;
 
     if (!selectedList) {
       container.innerHTML = `

@@ -4,8 +4,16 @@ import { mountListItem } from './listItem.js';
 import './listPanel.css';
 
 export const mountListPanel = (container) => {
+  let prevLists = null;
+  let prevSelectedListId = null;
+
   const render = () => {
-    const { lists } = appStore.getState();
+    const { lists, selectedListId } = appStore.getState();
+
+    if (lists === prevLists && selectedListId === prevSelectedListId) return;
+
+    prevLists = lists;
+    prevSelectedListId = selectedListId;
 
     container.innerHTML = `
       <div class="list-panel">
