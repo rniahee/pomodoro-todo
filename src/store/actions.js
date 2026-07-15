@@ -49,16 +49,6 @@ export const actions = {
     );
   },
 
-  updateTodo(listId, todoId, text, pomodoroMinutes) {
-    appStore.setState((prev) =>
-      updateTodosInList(prev, listId, (todos) =>
-        todos.map((t) =>
-          t.id !== todoId ? t : { ...t, text, pomodoroMinutes },
-        ),
-      ),
-    );
-  },
-
   deleteTodo(listId, todoId) {
     appStore.setState((prev) =>
       updateTodosInList(prev, listId, (todos) =>
