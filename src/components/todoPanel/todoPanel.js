@@ -35,6 +35,14 @@ const renderStats = (current, all) => `
 
 const setupDragAndDrop = (listEl, listId) => {
   let draggedIndex = null;
+  let dragOverEl = null;
+
+  const clearDragOver = () => {
+    if (dragOverEl) {
+      dragOverEl.classList.remove('todo-item--drag-over');
+      dragOverEl = null;
+    }
+  };
 
   listEl.querySelectorAll('li').forEach((li, index) => {
     li.setAttribute('draggable', 'true');
@@ -46,27 +54,26 @@ const setupDragAndDrop = (listEl, listId) => {
 
     li.addEventListener('dragend', () => {
       li.classList.remove('todo-item--dragging');
-      listEl.querySelectorAll('li').forEach((el) => {
-        el.classList.remove('todo-item--drag-over');
-      });
+      clearDragOver();
     });
 
     li.addEventListener('dragover', (e) => {
       e.preventDefault();
       if (index === draggedIndex) return;
-      listEl.querySelectorAll('li').forEach((el) => {
-        el.classList.remove('todo-item--drag-over');
-      });
-      li.classList.add('todo-item--drag-over');
+      if (dragOverEl !== li) {
+        clearDragOver();
+        dragOverEl = li;
+        li.classList.add('todo-item--drag-over');
+      }
     });
 
     li.addEventListener('dragleave', () => {
-      li.classList.remove('todo-item--drag-over');
+      clearDragOver();
     });
 
     li.addEventListener('drop', (e) => {
       e.preventDefault();
-      li.classList.remove('todo-item--drag-over');
+      clearDragOver();
       if (draggedIndex === null || draggedIndex === index) return;
       actions.reorderTodos(listId, draggedIndex, index);
     });
