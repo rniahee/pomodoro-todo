@@ -16,27 +16,20 @@ export const mountTodoInput = (container, listId) => {
   const btn = container.querySelector('.todo-input__btn');
   const error = container.querySelector('.todo-input__error');
 
-  const showError = (msg) => {
-    error.textContent = msg;
-  };
-  const clearError = () => {
-    error.textContent = '';
-  };
-
   const submit = () => {
     const text = textInput.value.trim();
     const minutes = parseInt(minutesInput.value, 10);
 
     if (!text) {
-      showError('할 일을 입력해주세요.');
+      error.textContent = '할 일을 입력해주세요.';
       return;
     }
     if (!minutes || minutes < 1 || minutes > 60) {
-      showError('뽀모도로 시간은 1~60분 사이로 입력해주세요.');
+      error.textContent = '뽀모도로 시간은 1~60분 사이로 입력해주세요.';
       return;
     }
 
-    clearError();
+    error.textContent = '';
     actions.addTodo(listId, text, minutes);
     textInput.value = '';
     minutesInput.value = '25';
@@ -46,6 +39,6 @@ export const mountTodoInput = (container, listId) => {
   textInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') submit();
   });
-  textInput.addEventListener('input', clearError);
-  minutesInput.addEventListener('input', clearError);
+  textInput.addEventListener('input', () => { error.textContent = ''; });
+  minutesInput.addEventListener('input', () => { error.textContent = ''; });
 };

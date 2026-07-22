@@ -13,20 +13,13 @@ export const mountListInput = (container) => {
   const btn = container.querySelector('.list-input__btn');
   const error = container.querySelector('.list-input__error');
 
-  const showError = (msg) => {
-    error.textContent = msg;
-  };
-  const clearError = () => {
-    error.textContent = '';
-  };
-
   const submit = () => {
     const name = input.value.trim();
     if (!name) {
-      showError('목록 이름을 입력해주세요.');
+      error.textContent = '목록 이름을 입력해주세요.';
       return;
     }
-    clearError();
+    error.textContent = '';
     actions.addList(name);
     input.value = '';
   };
@@ -35,5 +28,5 @@ export const mountListInput = (container) => {
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') submit();
   });
-  input.addEventListener('input', clearError);
+  input.addEventListener('input', () => { error.textContent = ''; });
 };
