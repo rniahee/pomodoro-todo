@@ -16,9 +16,14 @@
 
 .list-input {
   display: flex;
-  gap: 6px;
+  flex-direction: column;
   padding: 12px;
   border-bottom: 1px solid var(--color-border);
+}
+
+.list-input__row {
+  display: flex;
+  gap: 6px;
 }
 
 .list-input__field {
@@ -51,10 +56,13 @@
 }
 
 .list-input__error {
-  padding: 0 12px 8px;
+  padding: 4px 0 0;
   font-size: 12px;
   color: var(--color-primary);
-  min-height: 18px;
+}
+
+.list-input__error:empty {
+  display: none;
 }
 
 .list-item {

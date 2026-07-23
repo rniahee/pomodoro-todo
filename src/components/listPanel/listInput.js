@@ -3,10 +3,12 @@ import { actions } from '../../store/actions.js';
 export const mountListInput = (container) => {
   container.innerHTML = `
     <div class="list-input">
-      <input class="list-input__field" type="text" placeholder="목록 추가..." />
-      <button class="list-input__btn">추가</button>
+      <div class="list-input__row">
+        <input class="list-input__field" type="text" placeholder="목록 추가..." />
+        <button class="list-input__btn">추가</button>
+      </div>
+      <p class="list-input__error"></p>
     </div>
-    <p class="list-input__error"></p>
   `;
 
   const input = container.querySelector('.list-input__field');

@@ -3,12 +3,14 @@ import { actions } from '../../store/actions.js';
 export const mountTodoInput = (container, listId) => {
   container.innerHTML = `
     <div class="todo-input">
-      <input class="todo-input__field" type="text" placeholder="할 일 추가..." />
-      <input class="todo-input__minutes" type="number" min="1" max="60" value="25" />
-      <span class="todo-input__unit">분</span>
-      <button class="todo-input__btn">추가</button>
+      <div class="todo-input__row">
+        <input class="todo-input__field" type="text" placeholder="할 일 추가..." />
+        <input class="todo-input__minutes" type="number" min="1" max="60" value="25" />
+        <span class="todo-input__unit">분</span>
+        <button class="todo-input__btn">추가</button>
+      </div>
+      <p class="todo-input__error"></p>
     </div>
-    <p class="todo-input__error"></p>
   `;
 
   const textInput = container.querySelector('.todo-input__field');
