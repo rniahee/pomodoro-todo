@@ -1,5 +1,6 @@
 import { appStore } from '../../store/appStore.js';
 import { pomodoroTimer } from '../../timer/pomodoroTimer.js';
+import { escapeHtml } from '../../utils/escapeHtml.js';
 import { formatTime } from '../../utils/formatTime.js';
 import './header.css';
 
@@ -31,7 +32,7 @@ export const mountHeader = (container) => {
           ${
             isRunning
               ? `
-            <span class="header__todo-name">${activeTodo?.text ?? ''}</span>
+            <span class="header__todo-name">${escapeHtml(activeTodo?.text ?? '')}</span>
             <span class="header__time">${formatTime(remainingSeconds)}</span>
             <button class="header__btn js-pause-resume">
               ${isPaused ? '재개' : '일시정지'}

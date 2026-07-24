@@ -1,6 +1,7 @@
 import { appStore } from '../../store/appStore.js';
 import { actions } from '../../store/actions.js';
 import { pomodoroTimer } from '../../timer/pomodoroTimer.js';
+import { escapeHtml } from '../../utils/escapeHtml.js';
 import { formatTime } from '../../utils/formatTime.js';
 
 export const mountTodoItem = (container, listId, todo) => {
@@ -16,7 +17,7 @@ export const mountTodoItem = (container, listId, todo) => {
   container.innerHTML = `
     <div class="todo-item ${todo.isDone ? 'todo-item--done' : ''} ${isActive ? 'todo-item--active' : ''}">
       <input class="todo-item__check" type="checkbox" ${todo.isDone ? 'checked' : ''} />
-      <span class="todo-item__text">${todo.text}</span>
+      <span class="todo-item__text">${escapeHtml(todo.text)}</span>
       <span class="todo-item__count">${todo.pomodoroCount}🍅</span>
       <span class="todo-item__time">${remainingDisplay}</span>
       <button class="todo-item__start" ${todo.isDone || (isRunning && !isActive) ? 'disabled' : ''}>

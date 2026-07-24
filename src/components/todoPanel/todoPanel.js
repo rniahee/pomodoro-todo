@@ -1,6 +1,7 @@
 import { appStore } from '../../store/appStore.js';
 import { actions } from '../../store/actions.js';
 import { pomodoroTimer } from '../../timer/pomodoroTimer.js';
+import { escapeHtml } from '../../utils/escapeHtml.js';
 import { formatTime } from '../../utils/formatTime.js';
 import { mountTodoInput } from './todoInput.js';
 import { mountTodoItem } from './todoItem.js';
@@ -147,7 +148,7 @@ export const mountTodoPanel = (container) => {
 
     container.innerHTML = `
       <div class="todo-panel">
-        <h2 class="todo-panel__title">${selectedList.name}</h2>
+        <h2 class="todo-panel__title">${escapeHtml(selectedList.name)}</h2>
         ${renderStats(currentStats, allStats)}
         <div class="todo-panel__input-area"></div>
         <ul class="todo-panel__list">

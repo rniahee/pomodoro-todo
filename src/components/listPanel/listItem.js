@@ -1,5 +1,6 @@
 import { appStore } from '../../store/appStore.js';
 import { actions } from '../../store/actions.js';
+import { escapeHtml } from '../../utils/escapeHtml.js';
 
 export const mountListItem = (container, list) => {
   const { selectedListId } = appStore.getState();
@@ -7,7 +8,7 @@ export const mountListItem = (container, list) => {
 
   container.innerHTML = `
     <div class="list-item ${isSelected ? 'list-item--selected' : ''}">
-      <span class="list-item__name">${list.name}</span>
+      <span class="list-item__name">${escapeHtml(list.name)}</span>
       <button class="list-item__delete">✕</button>
     </div>
   `;
